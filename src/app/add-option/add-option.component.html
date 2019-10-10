@@ -1,0 +1,13 @@
+<h5>Car features</h5>
+<form (submit)="addOpt(option.value)">
+    <label for="options">Add new feature </label>
+    <input type="text" id="option" placeholder="please enter text" 
+    class="from-control" #option>
+    <br>
+    <button type="submit" class="btn btn-outline-success">Add</button>
+</form>
+<div class="alert alert-success">
+    <ul>
+        <li *ngFor="let opt of options">{{opt}}</li>
+    </ul>
+</div>
