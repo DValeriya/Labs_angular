@@ -1,40 +1,60 @@
-<div class="conteiner">
-    <br>
-    <h4><mark>Car:</mark>{{name}}
-    <small>{{model}}</small></h4>
-    <div class="alert alert-success">
-        Car specification:
-        <ul>
-            <li>Speed: <strong>{{speed}}</strong> ml</li>
-            <li>Color car: <strong>{{colors.car}}</strong></li>
-            <li>Color salon: <strong>{{colors.salon}}</strong></li>
-            <li>Color wheels: <strong>{{colors.wheels}}</strong></li>
-        </ul>
-    </div>
+<div>
+    <app-advertisement></app-advertisement>
+    <button class="btn btn-success" (click)="advertisement.hide()">Hide ad</button>
 
-    <app-add-option [options]="options" (onadd)="addOpt($event)"></app-add-option>
+    <nav class="col-md-2 d-none d-md-block sidebar">
+        <h2>{{welcome | uppercase}} {{myDate | date:"dd/MM/yyyy" | uppercase}} </h2>
+        <br>
+        <h4><mark>Car:</mark>{{name}}
+        <small>{{model}}</small></h4>
+        <div class="alert alert-success">
+            Car specification:
+            <ul>
+                <li>Speed: <strong>{{speed}}</strong>ml, <strong>{{speed | percent}}</strong></li>
+                <li>Color car: <strong>{{colors.car}}</strong></li>
+                <li>Color salon: <strong>{{colors.salon}}</strong></li>
+                <li>Color wheels: <strong>{{colors.wheels}}</strong></li>
+                <li>Color wheels: <strong>{{money | currency:'$' : 'code'}}</strong></li>
+            </ul>
+        </div>
     
-    <h5>Object edition</h5>
-    <button class="btn btn-danger" (click)="showEdit()">Edit</button>
-    <form *ngIf="isEdit">
-        <div class="form-group">                            
-            <input type="text" placeholder="Car name" 
-            class="form-control" [(ngModel)]="name" name="name"><br>
-            <input type="text" placeholder="Model" 
-            class="form-control" [(ngModel)]="model" name="model"><br>
-            <input type="text" placeholder="Speed" 
-            class="form-control" [(ngModel)]="speed" name="speed"><br>
-            <input type="text" placeholder="Car color" 
-            class="form-control" [(ngModel)]="colors.car" name="car-color"><br>
-            <input type="text" placeholder="Salon color" 
-            class="form-control" [(ngModel)]="colors.salon" name="salon-color"><br>
-            <input type="text" placeholder="Wheels color" 
-            class="form-control" [(ngModel)]="colors.wheels" name="wheels-color"><br>
-       </div>
-    </form>
+        <app-add-option [options]="options" (onadd)="addOpt($event)">
+            <h5>Car features</h5>
+        </app-add-option>
+        
+        <h5>Object edition</h5>
+        <button class="btn btn-danger" (click)="showEdit()">Edit</button>
+        <form *ngIf="isEdit; else Nochanges">
+            <div class="form-group">                            
+                <input type="text" placeholder="Car name" 
+                class="form-control" [(ngModel)]="name" name="name"><br>
+                <input type="text" placeholder="Model" 
+                class="form-control" [(ngModel)]="model" name="model"><br>
+                <input type="text" placeholder="Speed" 
+                class="form-control" [(ngModel)]="speed" name="speed"><br>
+                <input type="text" placeholder="Car color" 
+                class="form-control" [(ngModel)]="colors.car" name="car-color"><br>
+                <input type="text" placeholder="Salon color" 
+                class="form-control" [(ngModel)]="colors.salon" name="salon-color"><br>
+                <input type="text" placeholder="Wheels color" 
+                class="form-control" [(ngModel)]="colors.wheels" name="wheels-color"><br>
+           </div>
+        </form>
+        
+        <div>
+            <h5>Choose a car</h5>
+            <ng-container *ngTemplateOutlet="buttontemplate"></ng-container>
+        </div>
+        
+    </nav>
+</div>
 
-    <h5>Choose a car</h5>
+<ng-template #buttontemplate>
     <button class="btn btn-danger" (click)="carSelect('bmw')">BMW</button>
     <button class="btn btn-danger" (click)="carSelect('audi')">Audi</button>
     <button class="btn btn-danger" (click)="carSelect('mer')">Mercedes</button>
-</div>
+</ng-template>
+    
+<ng-template #Nochanges>
+    <p class="txtEdit">Please, change something to save</p>
+</ng-template>

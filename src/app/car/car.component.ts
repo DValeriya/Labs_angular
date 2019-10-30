@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdvertisementComponent } from '../advertisement/advertisement.component';
 
 @Component({
   selector: 'app-car',
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarComponent implements OnInit {
 
+  myDate = Date.now();
+
+  welcome = 'Date create:';
   name: string;
   model: string;
   speed: number;
   colors: Colors;
   options: string[];
+  money: number;
   isEdit = false;
+
+  @ViewChild(AdvertisementComponent, { static: false }) advertisement: AdvertisementComponent;
 
   constructor() { }
 
@@ -20,6 +27,7 @@ export class CarComponent implements OnInit {
     this.name = 'Audi';
     this.model = 'PRS8';
     this.speed = 300;
+    this.money = 64000;
     this.colors = {
       car: 'blue',
       salon: 'black',
@@ -41,6 +49,7 @@ export class CarComponent implements OnInit {
     this.name = 'BMW';
     this.model = 'M5';
     this.speed = 280;
+    this.money = 60000;
     this.colors = {
       car: 'green',
       salon: 'white',
@@ -51,6 +60,7 @@ export class CarComponent implements OnInit {
     this.name = 'Audi';
     this.model = 'PRS8';
     this.speed = 300;
+    this.money = 64000;
     this.colors = {
       car: 'blue',
       salon: 'black',
@@ -61,6 +71,7 @@ export class CarComponent implements OnInit {
     this.name = 'Mercedes';
     this.model = 'C5';
     this.speed = 378;
+    this.money = 67000;
     this.colors = {
       car: 'blue',
       salon: 'black',

@@ -6,12 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarComponent } from './car/car.component';
 import { AddOptionComponent } from './add-option/add-option.component';
+import { EmptyPipe } from './pipes/empty.pipe';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarComponent,
-    AddOptionComponent
+    AddOptionComponent,
+    EmptyPipe,
+    AdvertisementComponent
   ],
   imports: [
     BrowserModule,

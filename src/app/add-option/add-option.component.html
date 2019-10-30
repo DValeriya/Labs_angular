@@ -1,4 +1,6 @@
-<h5>Car features</h5>
+<ng-content></ng-content>
+
+
 <form (submit)="addOpt(option.value)">
     <label for="options">Add new feature </label>
     <input type="text" id="option" placeholder="please enter text" 
@@ -8,6 +10,6 @@
 </form>
 <div class="alert alert-success">
     <ul>
-        <li *ngFor="let opt of options">{{opt}}</li>
+        <li *ngFor="let opt of options">{{opt | empty}}</li>
     </ul>
 </div>
