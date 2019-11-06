@@ -1,14 +1,14 @@
 <div class="conteiner">
     <br>
     <h4><mark>Car:</mark>{{name}}
-    <small>{{model}}</small></h4>
+    <small [appMyDirective]=30>{{model}}</small></h4>
     <div class="alert alert-success">
         Car specification:
         <ul>
-            <li>Speed: <strong>{{speed}}</strong> ml</li>
-            <li>Color car: <strong>{{colors.car}}</strong></li>
-            <li>Color salon: <strong>{{colors.salon}}</strong></li>
-            <li>Color wheels: <strong>{{colors.wheels}}</strong></li>
+            <li>Speed: <strong [appMyDirective]=30>{{speed}}</strong> ml</li>
+            <li>Color car: <strong [appMyDirective]=30>{{colors.car}}</strong></li>
+            <li>Color salon: <strong [appMyDirective]=30>{{colors.salon}}</strong></li>
+            <li>Color wheels: <strong [appMyDirective]=30>{{colors.wheels}}</strong></li>
         </ul>
     </div>
 
@@ -20,7 +20,7 @@
         <div class="form-group">                            
             <input type="text" placeholder="Car name" 
             class="form-control" [(ngModel)]="name" name="name"><br>
-            <input type="text" placeholder="Model" 
+            <input type="text" placeholder="Model"  
             class="form-control" [(ngModel)]="model" name="model"><br>
             <input type="text" placeholder="Speed" 
             class="form-control" [(ngModel)]="speed" name="speed"><br>

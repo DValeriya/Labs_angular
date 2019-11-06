@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarComponent } from './car/car.component';
 import { AddOptionComponent } from './add-option/add-option.component';
+import { MyDirectiveDirective } from './shared/my-directive.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarComponent,
-    AddOptionComponent
+    AddOptionComponent,
+    MyDirectiveDirective
   ],
   imports: [
     BrowserModule,
