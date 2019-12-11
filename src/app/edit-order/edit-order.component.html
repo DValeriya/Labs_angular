@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Order</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <form [formGroup]="ordersForm" (ngSubmit)="onSubmit()">
+        
+        <div class="row">
+            <div class="col">
+              <label for="inputName">Name</label>
+              <input type="text" class="form-control" id="inputName" formControlName="name" placeholder="Enter name">
+  
+              <div class="not-valid" *ngIf="ordersForm.controls.name.hasError('required')">
+                Name is required
+              </div>
+            </div>
+        </div>
+  
+          <div class="form-group">
+            <label for="product">Product</label>
+            <select class="form-control" id="product" formControlName="product">
+              <option *ngFor="let product of products" [value]="product">{{ product }}</option>
+            </select>
+  
+            <div class="not-valid" *ngIf="ordersForm.controls.product.hasError('required')">
+              Product is required
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" formControlName="address" placeholder="Enter address">
+          </div>
+  
+          <div class="form-group">
+            <label for="total">Total</label>
+            <input type="number" class="form-control" id="total" formControlName="total">
+          </div>
+          
+          <div class="row justify-content-between">
+            <div class="col d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary mb-2 mr-2">Submit</button>
+              <button type="reset" class="btn btn-primary mb-2" (click)="onCancel()">Close</button>
+            </div>
+          </div>
+        </form>
+</div>

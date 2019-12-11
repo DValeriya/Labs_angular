@@ -1,0 +1,123 @@
+<div class="alert alert-primary d-flex justify-content-end">
+  <h2 class="col">Orders</h2>
+  <button class="btn btn-success" (click)="openModal(template)">Add order</button>
+  <button class="btn"><i class="material-icons" (click)="changeView()">table_chart</i></button>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="ordersForm" (ngSubmit)="onSubmit()">
+        
+      <div class="row">
+          <div class="col">
+            <label for="inputName">Name</label>
+            <input type="text" class="form-control" id="inputName" formControlName="name" placeholder="Enter name">
+
+            <div class="not-valid" *ngIf="ordersForm.controls.name.hasError('required')">
+              Name is required
+            </div>
+          </div>
+      </div>
+
+        <div class="form-group">
+          <label for="product">Product</label>
+          <select class="form-control" id="product" formControlName="product">
+            <option *ngFor="let product of products" [value]="product">{{ product }}</option>
+          </select>
+
+          <div class="not-valid" *ngIf="ordersForm.controls.product.hasError('required')">
+            Product is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="inputAddress">Address</label>
+          <input type="text" class="form-control" id="inputAddress" formControlName="address" placeholder="Enter address">
+        </div>
+
+        <div class="form-group">
+          <label for="total">Total</label>
+          <input type="number" class="form-control" id="total" formControlName="total">
+        </div>
+        
+        <div class="row justify-content-between">
+          <div class="col d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary mb-2 mr-2">Submit</button>
+            <button type="reset" class="btn btn-primary mb-2" (click)="onCancel()">Close</button>
+          </div>
+        </div>
+      </form>
+  </div>
+</ng-template>
+<div class="card-deck p-4" *ngIf="!isTable; else datatable">
+  <div *ngFor="let order of orders">
+    <div class="card mb-3" style="width: 20rem;">
+      <div class="card-header">
+        <div class="row justify-content-end px-3">
+          <div class="col mr-5"><h6>{{ order.name }}</h6></div>
+          <div class="btn-group" dropdown >
+            <button id="button-basic" dropdownToggle type="button" class="__btn" aria-controls="dropdown-animated">
+              <i class="material-icons">edit</i>
+            </button>
+              <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-animated">
+                <li role="menuitem"><a class="dropdown-item" (click)="edit(order)">Edit</a></li>
+                <li role="menuitem"><a class="dropdown-item" (click)="delete(order)">Delete</a></li>
+              </ul>
+            </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p>{{ order.product }}</p>
+        <p>{{ order.address }}</p>
+      </div>
+
+      <div class="card-footer">Total: {{ order.total | nullable | currency }}</div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #datatable>
+  <div class="mt-4 ml-4 w-50 table-responsive">
+      <ngx-datatable
+      class="material"
+      rowHeight="auto"
+      [rows]="orders"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [limit]="5">
+  
+      <ngx-datatable-column name="Name" width="200">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+  
+      <ngx-datatable-column name="Product" width="200">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+  
+      <ngx-datatable-column name="Address" width="200">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+      
+      <ngx-datatable-column name="Total" width="100">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <strong>{{ value }}</strong>
+          </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</ng-template>
